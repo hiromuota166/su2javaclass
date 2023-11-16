@@ -1,0 +1,69 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "【実践プロ演】提出用ZIPファイルの作成",
+      "type": "shell",
+      "windows": {
+        "options": {
+          "shell": {
+            "executable": "${env:SystemRoot}\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+          }
+        },
+        "command": "Compress-Archive",
+        "args": [
+          "-DestinationPath",
+          "\\\"${workspaceFolderBasename}_$(Get-Date -UFormat %y%m%d%H%M%S)\\\"",
+          "-Path",
+          "src,resources,.vscode,README.md",
+          "-Verbose"
+        ]
+      },
+      "osx": {
+        "options": {
+          "shell": {
+            "executable": "/bin/bash",
+            "args": [
+              "-c"
+            ]
+          }
+        },
+        "command": "zip",
+        "args": [
+          "-X",
+          "-r",
+          "\"${workspaceFolderBasename}_`date +\"%y%m%d%H%M%S\"`.zip\"",
+          "src",
+          "resources",
+          ".vscode",
+          "README.md",
+          "-x",
+          "\"*/.DS_Store\""
+        ]
+      },
+      "linux": {
+        "options": {
+          "shell": {
+            "executable": "/bin/bash",
+            "args": [
+              "-c"
+            ]
+          }
+        },
+        "command": "zip",
+        "args": [
+          "-X",
+          "-r",
+          "\"${workspaceFolderBasename}_`date +\"%y%m%d%H%M%S\"`.zip\"",
+          "src",
+          "resources",
+          ".vscode",
+          "README.md"
+        ]
+      },
+      "problemMatcher": []
+    }
+  ]
+}

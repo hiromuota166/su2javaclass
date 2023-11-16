@@ -1,0 +1,19 @@
+{
+  "java.project.sourcePaths": [
+    "src",
+    "resources"
+  ],
+  // https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml
+  "java.format.settings.url": ".vscode/eclipse-java-google-style.xml",
+  "java.settings.url": ".vscode/org.eclipse.jdt.core.prefs",
+  "[java]": {
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false,
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "editor.renderWhitespace": "all",
+    "editor.rulers": [
+      80,
+      100
+    ],
+  },
+}
