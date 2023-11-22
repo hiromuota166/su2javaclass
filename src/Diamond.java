@@ -14,6 +14,13 @@ class Diamond extends Shape {
     this.width = width;
     this.height = height;
   }
+
+  @Override
+  public void move(int dx, int dy) {
+    this.left += dx;
+    this.top += dy;
+  }
+
   @Override
   public java.awt.Shape createPath() {
     int[] xPoints = {left + width / 2, left + width, left + width / 2, left};
@@ -39,10 +46,7 @@ class Diamond extends Shape {
   }
 
   @Override
-  public void draw(Graphics g) {
-    var path = this.createPath();
-    
-    Graphics2D g2 = (Graphics2D) g;
-    g2.fill(path);
+  protected void drawShape2D (Graphics2D g2, java.awt.Shape path) {
+  g2.fill(path);
   }
 }

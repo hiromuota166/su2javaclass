@@ -15,6 +15,7 @@ public class CanvasPanel extends JPanel {
   private CanvasState canvasStateCreate;
   private CanvasState canvasStateSelect;
   private CanvasState state;
+  private List<UIObserver> observers = new ArrayList<>();
 
   public CanvasPanel() {
     var listener = new CanvasListener(this);
@@ -60,6 +61,7 @@ public class CanvasPanel extends JPanel {
       this.state = this.canvasStateCreate;
     }
     this.state.updateCursor();
+    this.notifyUIObservers();
   }
 
   public CanvasState getState() {
@@ -84,6 +86,7 @@ public class CanvasPanel extends JPanel {
     command.execute();
     this.commandHistory.push(command);
     this.undoHistory.clear();
+    this.notifyUIObservers();
   }
 
   public void undo() {
@@ -91,6 +94,7 @@ public class CanvasPanel extends JPanel {
       Command command = this.commandHistory.pop();
       command.undo();
       this.undoHistory.push(command);
+      this.notifyUIObservers();
     }
   }
 
@@ -99,6 +103,7 @@ public class CanvasPanel extends JPanel {
       Command command = this.undoHistory.pop();
       command.execute();
       this.commandHistory.push(command);
+      this.notifyUIObservers();
     }
   }
 
@@ -109,5 +114,32 @@ public class CanvasPanel extends JPanel {
       }
     }
     return null;
+  }
+
+  public void setColor(Color color) {
+    this.color = color;
+    this.notifyUIObservers();
+  }
+
+  public Color getColor() {
+    return this.color;
+  }
+
+  public void addUIObserver(UIObserver observer) {
+    this.observers.add(observer);
+  }
+
+  public void notifyUIObservers() {
+    for (UIObserver observer : this.observers) {
+      observer.stateChanged();
+    }
+  }
+
+  public boolean isCommandHistoryEmpty() {
+    return this.commandHistory.isEmpty();
+  }
+
+  public boolean isUndoHistoryEmpty() {
+    return this.undoHistory.isEmpty();
   }
 }

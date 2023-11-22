@@ -1,4 +1,3 @@
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
@@ -13,6 +12,12 @@ public class Rectangle extends Shape {
     this.top = top;
     this.width = width;
     this.height = height;
+  }
+
+  @Override
+  public void move(int dx, int dy) {
+    this.left = this.left + dx;
+    this.top = this.top + dy;
   }
 
   @Override
@@ -38,9 +43,7 @@ public class Rectangle extends Shape {
   }
 
   @Override
-  public void draw(Graphics g) {
-    var path = this.createPath();
-    Graphics2D g2 = (Graphics2D) g;
-    g2.fill(path);
+  protected void drawShape2D (Graphics2D g2, java.awt.Shape path) {
+  g2.fill(path);
   }
 }

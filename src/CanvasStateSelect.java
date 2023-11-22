@@ -52,10 +52,17 @@ public class CanvasStateSelect extends CanvasState {
 
   @Override
   public void mouseReleased(MouseEvent me) {
-  // 図形の移動は終了
-  this.shape = null;
-  // カーソルの形を図形選択モードのデフォルトに戻す．
-  this.updateCursor();
+    if (this.shape != null) {
+      if (this.lastX != this.startX || this.lastY != this.startY) {
+        this.canvas.moveShape(this.shape, this.startX - this.lastX, this.startY - this.lastY);
+        Command command = new CommandMove(this.canvas, this.shape, this.lastX - this.startX,
+            this.lastY - this.startY);
+        this.canvas.execute(command);
+      }
+      this.shape = null;
+    }
+    // カーソルの形を図形選択モードのデフォルトに戻す．
+    this.updateCursor();
   }
 
   @Override

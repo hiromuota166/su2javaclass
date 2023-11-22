@@ -1,4 +1,3 @@
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 
@@ -12,6 +11,13 @@ class EquilateralTriangle extends Shape {
     this.top = top;
     this.width = width;
   }
+
+  @Override
+  public void move(int dx, int dy) {
+    this.left += dx;
+    this.top += dy;
+  }
+
   @Override
   public java.awt.Shape createPath() {
     int halfWidth = width / 2;
@@ -20,22 +26,15 @@ class EquilateralTriangle extends Shape {
     int[] yPoints = {top + height, top + height, top};
     return new Polygon(xPoints, yPoints, 3);
   }
+
   @Override
   public double area() {
     return this.width * this.width * Math.sqrt(3) / 4.0;
   }
 
   @Override
-  public void draw(Graphics g) {
-
-    int halfWidth = width / 2;
-    int height = (int) (Math.sqrt(3) * halfWidth);
-    int[] xPoints = {left, left + width, left + halfWidth};
-    int[] yPoints = {top + height, top + height, top};
-    var path = this.createPath();
-    Graphics2D g2 = (Graphics2D) g;
-    g2.draw(new Polygon(xPoints, yPoints, 3));
-    g2.fill(path);
+  protected void drawShape2D (Graphics2D g2, java.awt.Shape path) {
+  g2.fill(path);
   }
 
   @Override

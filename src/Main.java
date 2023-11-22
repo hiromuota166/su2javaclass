@@ -5,7 +5,10 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 import javax.swing.WindowConstants;
+import javax.swing.JColorChooser;
+import java.awt.Graphics;
 
 public class Main {
 
@@ -31,11 +34,31 @@ public class Main {
     commandPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
     commandPanel.setBackground(new Color(238, 238, 238));
 
-    var circleButton = new JButton("Circle");
+    var colorButton = new JButton("Color") {
+      @Override
+      public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(canvas.getColor());
+        g.fillRect(0, 0, this.getWidth(), this.getHeight());
+      }
+    };
+    colorButton.addActionListener(event -> {
+      Color color = JColorChooser.showDialog(canvas, "Choose Color", canvas.getColor());
+      if (color != null) {
+        canvas.setColor(color);
+      }
+    });
+    colorButton.setBorderPainted(false);
+    commandPanel.add(colorButton);
+    canvas.addUIObserver(colorButton::repaint);
+
+    var circleButton = new JToggleButton("Circle");
 
     var circleFactory = new CircleFactory();
     circleButton.addActionListener(event -> canvas.setFactory(circleFactory));
     commandPanel.add(circleButton);
+
+    canvas.addUIObserver(() -> circleButton.setSelected(canvas.getFactory() == circleFactory));
 
     var rectangleButton = new JButton("Rectangle");
 
@@ -79,10 +102,12 @@ public class Main {
     var undoButton = new JButton("Undo");
     undoButton.addActionListener(event -> canvas.undo());
     commandPanel.add(undoButton);
+    canvas.addUIObserver(() -> undoButton.setEnabled(!canvas.isCommandHistoryEmpty()));
 
     var redoButton = new JButton("Redo");
     redoButton.addActionListener(event -> canvas.redo());
     commandPanel.add(redoButton);
+    canvas.addUIObserver(() -> redoButton.setEnabled(!canvas.isUndoHistoryEmpty()));
 
     var clearButton = new JButton("Clear");
     clearButton.addActionListener(event -> {
@@ -90,16 +115,16 @@ public class Main {
       canvas.execute(command);
     });
     commandPanel.add(clearButton);
+    canvas.addUIObserver(() -> clearButton.setEnabled(canvas.getShapes().size() > 0));
 
     var selectButton = new JButton("Select");
     selectButton.addActionListener(event -> canvas.setFactory(null));
     commandPanel.add(selectButton);
 
-    frame.add(commandPanel, BorderLayout.NORTH);
+    frame.add(canvas, BorderLayout.CENTER);
+    selectButton.doClick();
     frame.pack();
     frame.setVisible(true);
-
-    selectButton.doClick();
     circleButton.doClick();
   }
 }

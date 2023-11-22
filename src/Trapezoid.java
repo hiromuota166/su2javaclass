@@ -12,6 +12,14 @@ class Trapezoid extends Shape {
     this.bottomBase = bottomBase;
     this.height = height;
   }
+
+  @Override
+  public void move(int dx, int dy) {
+    this.topBase += dx;
+    this.bottomBase += dx;
+    this.height += dy;
+  }
+
   @Override
   public java.awt.Shape createPath() {
     Path2D path = new Path2D.Double();
@@ -22,6 +30,7 @@ class Trapezoid extends Shape {
     path.closePath();
     return path;
   }
+
   @Override
   public double area() {
     return (this.topBase + this.bottomBase) * this.height / 2.0;
@@ -34,10 +43,8 @@ class Trapezoid extends Shape {
   }
 
   @Override
-  public void draw(Graphics g) {
-    Graphics2D g2 = (Graphics2D) g;
-    var path = this.createPath();
-    g2.fill(path);
+  protected void drawShape2D (Graphics2D g2, java.awt.Shape path) {
+  g2.fill(path);
   }
 
   @Override

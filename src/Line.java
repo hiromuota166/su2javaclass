@@ -1,4 +1,3 @@
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 
@@ -16,8 +15,16 @@ public class Line extends Shape {
   }
 
   @Override
+  public void move(int dx, int dy) {
+    this.x1 += dx;
+    this.y1 += dy;
+    this.x2 += dx;
+    this.y2 += dy;
+  }
+
+  @Override
   public java.awt.Shape createPath() {
-  return new Line2D.Double(this.x1, this.y1, this.x2, this.y2);
+    return new Line2D.Double(this.x1, this.y1, this.x2, this.y2);
   }
 
   @Override
@@ -40,9 +47,7 @@ public class Line extends Shape {
   }
 
   @Override
-  public void draw(Graphics g) {
-    var path = this.createPath();
-    Graphics2D g2 = (Graphics2D) g;
-    g2.draw(path);
+  protected void drawShape2D (Graphics2D g2, java.awt.Shape path) {
+  g2.draw(path);
   }
 }

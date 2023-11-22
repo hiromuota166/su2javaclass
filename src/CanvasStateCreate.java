@@ -20,6 +20,7 @@ public class CanvasStateCreate extends CanvasState {
     int x = me.getX();
     int y = me.getY();
     this.shape = factory.create(x, y);
+    this.shape.setColor(this.canvas.getColor());
     this.canvas.addShape(this.shape);
     this.canvas.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
   }
