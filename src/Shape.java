@@ -17,6 +17,14 @@ public abstract class Shape {
 
   public abstract java.awt.Shape createPath();
 
+  public abstract int getWidth();
+
+  public abstract int getHeight();
+
+  public abstract int getX();
+
+  public abstract int getY();
+
   public boolean contains(int x, int y) {
     var path = this.createPath();
     return path.intersects(x - INTERSECTION_THRESHOLD / 2.0, y - INTERSECTION_THRESHOLD / 2.0,

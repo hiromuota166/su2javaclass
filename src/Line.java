@@ -23,6 +23,26 @@ public class Line extends Shape {
   }
 
   @Override
+  public int getX() {
+      return Math.min(x1, x2);
+  }
+
+  @Override
+  public int getY() {
+      return Math.min(y1, y2);
+  }
+
+  @Override
+  public int getWidth() {
+      return Math.abs(x2 - x1);
+  }
+
+  @Override
+  public int getHeight() {
+      return Math.abs(y2 - y1);
+  }
+  
+  @Override
   public java.awt.Shape createPath() {
     return new Line2D.Double(this.x1, this.y1, this.x2, this.y2);
   }

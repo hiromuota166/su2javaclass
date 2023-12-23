@@ -19,6 +19,26 @@ class EquilateralTriangle extends Shape {
   }
 
   @Override
+  public int getX() {
+      return this.left;
+  }
+
+  @Override
+  public int getY() {
+      return this.top;
+  }
+
+  @Override
+  public int getWidth() {
+      return this.width;
+  }
+
+  @Override
+  public int getHeight() {
+      return (int) (Math.sqrt(3) * (this.width / 2));
+  }
+  
+  @Override
   public java.awt.Shape createPath() {
     int halfWidth = width / 2;
     int height = (int) (Math.sqrt(3) * halfWidth);

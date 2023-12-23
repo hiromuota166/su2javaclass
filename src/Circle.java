@@ -18,6 +18,27 @@ public class Circle extends Shape {
     this.y = this.y + dy;
   }
 
+
+  @Override
+  public int getWidth() {
+      return r;
+  }
+
+  @Override
+  public int getHeight() {
+      return r;
+  }
+
+  @Override
+  public int getX() {
+      return r;
+  }
+
+  @Override
+  public int getY() {
+      return r;
+  }
+
   @Override
   public java.awt.Shape createPath() {
     return new Ellipse2D.Double(this.x - this.r, this.y - this.r, this.r * 2, this.r * 2);

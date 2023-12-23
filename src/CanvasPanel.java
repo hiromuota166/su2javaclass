@@ -68,11 +68,6 @@ public class CanvasPanel extends JPanel {
     return this.state;
   }
 
-  public void resizeShape(Shape shape, int x, int y) {
-    shape.resize(x, y);
-    this.repaint();
-  }
-
   public List<Shape> getShapes() {
     return this.shapes;
   }
@@ -142,4 +137,10 @@ public class CanvasPanel extends JPanel {
   public boolean isUndoHistoryEmpty() {
     return this.undoHistory.isEmpty();
   }
+  
+  public void resizeShape(Shape shape, int newWidth, int newHeight) {
+    Command command = new CommandResize(this, shape, shape.getWidth(), shape.getHeight(), newWidth, newHeight);
+    execute(command);
+  }
+
 }

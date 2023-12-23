@@ -7,8 +7,6 @@ import java.awt.event.MouseEvent;
 public class CanvasListener extends MouseAdapter {
   // 対応するキャンバス
   private CanvasPanel canvas;
-  // 作成中の図形
-  private Shape shape;
 
   /**
    * コンストラクタ 対応するキャンバスを引数にとる．

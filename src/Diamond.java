@@ -1,4 +1,3 @@
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 
@@ -15,6 +14,25 @@ class Diamond extends Shape {
     this.height = height;
   }
 
+  @Override
+  public int getX() {
+      return this.left;
+  }
+
+  @Override
+  public int getY() {
+      return this.top;
+  }
+
+  @Override
+  public int getWidth() {
+      return this.width;
+  }
+
+  @Override
+  public int getHeight() {
+      return this.height;
+  }
   @Override
   public void move(int dx, int dy) {
     this.left += dx;

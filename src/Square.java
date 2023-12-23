@@ -1,4 +1,3 @@
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
@@ -17,6 +16,26 @@ class Square extends Shape {
   public void move(int dx, int dy) {
     this.left += dx;
     this.top += dy;
+  }
+
+  @Override
+  public int getX() {
+      return this.left;
+  }
+
+  @Override
+  public int getY() {
+      return this.top;
+  }
+
+  @Override
+  public int getWidth() {
+      return this.width;
+  }
+
+  @Override
+  public int getHeight() {
+      return this.width; // 正方形では幅と高さが同じ
   }
 
   @Override

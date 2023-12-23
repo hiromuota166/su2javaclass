@@ -1,4 +1,3 @@
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Path2D;
 
@@ -18,6 +17,26 @@ class Trapezoid extends Shape {
     this.topBase += dx;
     this.bottomBase += dx;
     this.height += dy;
+  }
+
+  @Override
+  public int getX() {
+      return 0; // 台形の左端は原点
+  }
+
+  @Override
+  public int getY() {
+      return 0; // 台形の上端も原点
+  }
+
+  @Override
+  public int getWidth() {
+      return Math.max(topBase, bottomBase); // 幅は上底と下底の長い方
+  }
+
+  @Override
+  public int getHeight() {
+      return this.height; // 高さ
   }
 
   @Override

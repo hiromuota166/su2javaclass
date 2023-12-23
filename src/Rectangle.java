@@ -15,6 +15,26 @@ public class Rectangle extends Shape {
   }
 
   @Override
+  public int getWidth() {
+      return width;
+  }
+
+  @Override
+  public int getHeight() {
+      return height;
+  }
+
+  @Override
+  public int getX() {
+      return width;
+  }
+
+  @Override
+  public int getY() {
+      return height;
+  }
+
+  @Override
   public void move(int dx, int dy) {
     this.left = this.left + dx;
     this.top = this.top + dy;

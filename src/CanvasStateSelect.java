@@ -40,17 +40,6 @@ public class CanvasStateSelect extends CanvasState {
   }
 
   @Override
-  public void mouseDragged(MouseEvent me) {
-    if (this.shape != null) {
-      int x = me.getX();
-      int y = me.getY();
-      this.canvas.moveShape(this.shape, x - this.lastX, y - this.lastY);
-      this.lastX = x;
-      this.lastY = y;
-    }
-  }
-
-  @Override
   public void mouseReleased(MouseEvent me) {
     if (this.shape != null) {
       if (this.lastX != this.startX || this.lastY != this.startY) {
@@ -79,5 +68,15 @@ public class CanvasStateSelect extends CanvasState {
     } else {
       this.canvas.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
+  }
+
+  // CanvasStateSelect.java
+  @Override
+  public void mouseDragged(MouseEvent me) {
+      if (this.shape != null) {
+          int newWidth = me.getX() - shape.getX();
+          int newHeight = me.getY() - shape.getY();
+          canvas.resizeShape(shape, newWidth, newHeight);
+      }
   }
 }
